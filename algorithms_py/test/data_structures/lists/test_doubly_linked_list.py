@@ -1,6 +1,6 @@
 from nose.tools import raises
 from algorithms_py.utils.generate_list import generate_list
-from algorithms_py.data_structures.lists.singly_linked_list import (
+from algorithms_py.data_structures.lists.doubly_linked_list import (
     from_list,
 )
 
@@ -21,7 +21,7 @@ def check_equivalence(py_list, linked_list):
     return True
 
 
-class TestSinglyLinkedList:
+class TestDoublyLinkedList:
     def setup(self):
         self.base_list = generate_list(size=100, negatives=True)
         self.linked_list = from_list(self.base_list)

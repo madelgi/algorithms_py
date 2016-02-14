@@ -12,6 +12,15 @@ class SinglyLinkedList(object):
     def __init__(self, head=None):
         self.head = head
 
+    def __str__(self):
+        x = self.head
+        string = "["
+        while x.next is not None:
+            string += str(x.val) + ", "
+            x = x.next
+
+        return (string + str(x.val) + "]")
+
     def prepend(self, val):
         """ Insert a value to the front of the list. """
         new_node = Node(val)
@@ -70,18 +79,8 @@ class SinglyLinkedList(object):
         else:
             previous.set_next(current.next)
 
-    def __str__(self):
-        x = self.head
-        string = "["
-        while x.next is not None:
-            string += str(x.val) + ", "
-            x = x.next
-
-        return (string + str(x.val) + "]")
-
     def reverse(self):
-        """
-        Reverse the list.
+        """Reverse the list.
         """
         def reverse_help(current, last):
             if current is None:
@@ -95,30 +94,16 @@ class SinglyLinkedList(object):
 
 
 def from_list(lst):
-    """
-    Convert a python list to a SingleLinkedList.
+    """Convert a python list to a SingleLinkedList.
+
+    Args:
+        lst: A python list.
+
+    Returns:
+        An equivalent SinglyLinkedList.
     """
     reverse = lst[::-1]
     sll = SinglyLinkedList()
     for x in reverse:
         sll.prepend(x)
     return sll
-
-
-def main():
-    lst = SinglyLinkedList()
-    lst.prepend(10)
-    lst.prepend(11)
-    lst.prepend(-1)
-    lst.append(32)
-    lst.append(-123)
-    print str(lst)
-    print "length: " + str(lst.length())
-    print lst.search(11).val
-    print lst.search(-1).val
-    lst.delete(11)
-    print str(lst)
-
-
-if __name__ == '__main__':
-    main()

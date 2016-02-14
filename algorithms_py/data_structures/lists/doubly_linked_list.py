@@ -16,6 +16,15 @@ class DoublyLinkedList(object):
         self.head = head
         self.last = last
 
+    def __str__(self):
+        x = self.head
+        string = "["
+        while x.next is not None:
+            string += str(x.val) + ", "
+            x = x.next
+
+        return (string + str(self.last.val) + "]")
+
     def prepend(self, val):
         """ Insert a value to the front of the list. """
         new_node = Node(val)
@@ -82,15 +91,8 @@ class DoublyLinkedList(object):
         else:
             previous.set_next(current.next)
 
-    def __str__(self):
-        x = self.head
-        string = "["
-        while x.next is not None:
-            string += str(x.val) + ", "
-            x = x.next
-
-        return (string + str(self.last.val) + "]")
-
+    def reverse(self):
+        raise NotImplementedError
 
 def from_list(lst):
     """ Convert a python list into a doubly linked list. """
@@ -98,15 +100,3 @@ def from_list(lst):
     for x in lst:
         dll.append(x)
     return dll
-
-
-def main():
-    lst = [1, 8, 23, 10, 9, 13, 142, -5, 2, 3]
-    dll = from_list(lst)
-    print str(dll)
-    print dll.head.val
-    print dll.last.val
-    print dll.length()
-
-if __name__ == '__main__':
-    main()

@@ -1,7 +1,11 @@
 class ArrayList(object):
-    def __init__(self):
-        self.vals = [0]*16
-        self.numElts = 0
+    def __init__(self, vals=None):
+        if not vals:
+            self.vals = [0]*16
+            self.numElts = 0
+        else:
+            self.vals = vals
+            self.numElts = len(vals)
 
     def __str__(self):
         string = "["
@@ -27,6 +31,7 @@ class ArrayList(object):
         list_length = len(self.vals)
 
         if self.numElts >= list_length:
+            # Copy values to a bigger array if necessary.
             biggerList = [0]*(2*list_length)
             i = 0
             while i < list_length:
@@ -37,11 +42,14 @@ class ArrayList(object):
         self.vals[self.numElts] = val
         self.numElts = self.numElts + 1
 
+    def length(self):
+        return self.numElts
+
     def search(self, val):
         for i in range(self.numElts):
             if self.vals[i] == val:
                 return val
-        return ValueError("Value not found, br.")
+        raise ValueError("Value not found, br.")
 
     def delete(self, val):
         for i in range(self.numElts):
@@ -49,22 +57,8 @@ class ArrayList(object):
             if self.vals[i] == val:
                 self.vals = self.vals[:i-1] + self.vals[i:]
                 self.numElts -= 1
-        return ValueError("Value not found, br.")
+                break
+        raise ValueError("Value not found, br.")
 
-
-def main():
-    lst = ArrayList()
-    for i in range(10):
-        lst.append(i)
-    print str(lst)
-    lst.prepend(2)
-    print str(lst)
-    lst.prepend(1)
-    print str(lst)
-    lst.prepend(-10)
-    lst.delete(5)
-    print str(lst)
-
-
-if __name__ == '__main__':
-    main()
+    def reverse(self):
+        self.vals = self.vals[:self.numElts][::-1] + self.vals[self.numElts:]
