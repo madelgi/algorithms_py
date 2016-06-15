@@ -22,7 +22,7 @@ class Stack(object):
 
     def pop(self):
         if self.is_empty():
-            return ValueError("Nothing in yr stack, br.")
+            raise ValueError
         popped = self.vals[self.top]
         self.vals = self.vals[:self.top]
         self.top -= 1
@@ -32,20 +32,3 @@ class Stack(object):
         if self.top < 0:
             return True
         return False
-
-
-def main():
-    stack = Stack()
-    stack.push(3)
-    stack.push(10)
-    stack.push(-1)
-    stack.push(2)
-    print stack
-    print "next stack:"
-    stack.pop()
-    stack.pop()
-    print stack
-
-
-if __name__ == '__main__':
-    main()

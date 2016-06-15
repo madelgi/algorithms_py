@@ -5,7 +5,7 @@ class Element(object):
 
 
 class DirectAddressTable(object):
-    def __init__(self, size):
+    def __init__(self, size, vals=None):
         """
         Initialize a direct address table with keys drawn from a universe
         of size `size`.
@@ -25,61 +25,35 @@ class DirectAddressTable(object):
         return string[:-2] + "}"
 
     def search(self, key):
+        """Return the value at a certain key in the direct address table.
         """
-        Return the value at a certain key in the direct address table.
-        """
-        try:
-            return self.table[key]
-        except IndexError:
-            return None
+        if key >= self.size:
+            raise IndexError
+        return self.table[key]
 
     def insert(self, elt):
+        """Insert an element into our direct address table.
         """
-        Insert an element into our direct address table.
-        """
-        try:
-            self.table[elt.key] = elt
-        except IndexError:
-            pass
+        if elt.key >= self.size:
+            raise IndexError
+        self.table[elt.key] = elt
 
     def delete(self, elt):
-        """
-        Remove an element from our direct address table.
+        """Remove an element from our direct address table.
         """
         try:
             self.table[elt.key] = None
         except IndexError:
             pass
 
+    def _set_vals(self, vals):
+        self.vals = vals
+
 
 def from_list(lst):
+    """Create a direct address table from a list.
+    """
     list_len = len(lst)
     direct_address_table = DirectAddressTable(list_len)
-    for index, item in enumerate(lst):
-        direct_address_table.insert(Element(index, item))
-
+    direct_address_table._set_vals(lst)
     return direct_address_table
-
-def test():
-    table = DirectAddressTable(10)
-    print table
-    e1 = Element(1, "hello")
-    e2 = Element(5, 4)
-    e3 = Element(2, 3.1415)
-    e4 = Element(9, True)
-
-    table.insert(e1)
-    table.insert(e2)
-    table.insert(e3)
-    table.insert(e4)
-    print table
-    table.delete(e2)
-    print table
-    table.delete(Element(6, "blah"))
-    print table
-    print table.search(2).val
-    print table.search(9).val
-    print table.search(66)
-
-if __name__ == '__main__':
-    test()

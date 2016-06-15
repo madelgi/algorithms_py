@@ -52,12 +52,15 @@ class ArrayList(object):
         raise ValueError("Value not found, br.")
 
     def delete(self, val):
-        for i in range(self.numElts):
+        for i in xrange(self.numElts):
             # we just delete the first instance of the element.
             if self.vals[i] == val:
-                self.vals = self.vals[:i-1] + self.vals[i:]
+                if i == self.numElts:
+                    self.vals = self.vals[:self.numElts]
+                else:
+                    self.vals = self.vals[:i] + self.vals[i+1:]
                 self.numElts -= 1
-                break
+                return
         raise ValueError("Value not found, br.")
 
     def reverse(self):

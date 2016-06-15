@@ -24,7 +24,7 @@ def check_equivalence(py_list, linked_list):
 class TestDoublyLinkedList:
     def setup(self):
         self.base_list = generate_list(size=100, negatives=True)
-        self.linked_list = from_list(self.base_list)
+        self.linked_list = from_list(list(self.base_list))
 
     def test_create(self):
         assert check_equivalence(self.base_list, self.linked_list)

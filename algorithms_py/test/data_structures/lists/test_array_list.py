@@ -21,8 +21,10 @@ def check_equivalence(py_list, array_list):
 
 class TestArrayList:
     def setup(self):
+        self.base_empty = []
         self.base_list = generate_list(size=100, negatives=True)
-        self.array_list = ArrayList(self.base_list)
+        self.array_list = ArrayList(list(self.base_list))
+        self.array_empty = ArrayList(list([]))
 
     def test_create(self):
         assert check_equivalence(self.base_list, self.array_list)
